@@ -5,10 +5,6 @@ $javaDirsRoot = "C:\PROGRA~1\Java"
 $javaFile = "bin\java.exe"
 $javaCompilerFile = "bin\javac.exe"
 $javaDirs = @("jdk1.8.0_241", "jdk-11.0.2", "jdk-12.0.1", "jdk-13.0.1", "jdk-14.0.1", "openjdk-14.0.2", "openjdk-15")
-#$javaDirs = @("jdk1.8.0_241", "jdk-11.0.2")
-#$javaDirs = @( "jdk1.8.0_241")
-#$javaDirs = @("jdk1.8.0_241")
-#$javaDirs = @("jdk-14.0.1")
 
 $timestamp = $( Get-Date -Format "yyyyddMMHHmmssffff" )
 $output_dir = "./data/" + $timestamp
@@ -39,10 +35,10 @@ foreach ($javaDir in $javaDirs)
     "IteratingBenchmark",
     "-bm", "thrpt",
     "-jvmArgs", "-XX:+UseG1GC",
-    "-wi", "3",
+    "-wi", "10",
     "-w", "5",
-    "-r", "5",
-    "-i", "5",
+    "-r", "10",
+    "-i", "30",
     "-f", "1",
     "-rf", "scsv",
     "-rff", "$output_dir/benchmark_$javaDir.scsv")
