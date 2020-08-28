@@ -1,10 +1,12 @@
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-import os
 import io
+import os
 import sys
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import seaborn as sns
+
 
 def read_text_file(filepath):
     with open(filepath, 'r') as file:
@@ -16,6 +18,7 @@ def get_line_starting_with(txt, starts_with):
     last_index = txt.find('\n', first_index)
 
     return txt[first_index: last_index]
+
 
 def read_measures(filepath):
     result = pd.DataFrame()
@@ -29,7 +32,7 @@ def read_measures(filepath):
             #                ' ' + get_line_starting_with(txt, 'java.vm.version:').replace('java.vm.version: ', '')
 
             # java_version = java_version.replace('Java 25.241-b07', 'Java 1.8.0')
-            java_version = file.replace('benchmark_', '').replace('.scsv', '').replace('-','')
+            java_version = file.replace('benchmark_', '').replace('.scsv', '').replace('-', '')
 
             data_string = io.StringIO("\n".join([line for line in txt.split('\n') if ';' in line]))
 
@@ -52,7 +55,8 @@ def print_heatmaps(measures):
         Cols = current_df['memory'].unique()
         df = pd.DataFrame(current_df['Score'].values.reshape(len(Index), len(Cols)), index=Index, columns=Cols)
 
-        sns.heatmap(df, annot=True, fmt='.3g').set_title('Throughput of summing array elements (size: ' + str(current_elements_size) + ')')
+        sns.heatmap(df, annot=True, fmt='.3g').set_title(
+            'Throughput of summing array elements (size: ' + str(current_elements_size) + ')')
         # plt.show()
         plt.xlabel("Memory [GB]")
         plt.ylabel("Java version")
