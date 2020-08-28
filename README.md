@@ -1,7 +1,7 @@
 # Java Loop Benchmark 
 
 ## Requirements (Windows)
-- Python 3 with td/tk
+- Python 3 with td/tk, matplotlib, pandas, seaborn
 - Valid JDK paths set in `run_tests.ps1`
 
 #### How to set JDK paths in `run_tests.ps1`?
@@ -14,7 +14,7 @@ User should define names of directories with different JDK inside in `javaDirs` 
 Benchmark can be launched by `run_tests.ps1` ran in powershell. 
 
 ## Requirements (Linux)
-- Python 3
+- Python 3 with matplotlib, pandas, seaborn
 - Maven
 - Valid jdk paths set in `run_tests.sh`
 
