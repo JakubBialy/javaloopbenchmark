@@ -1,0 +1,8 @@
+.idea/**
+out/**
+*.iml
+target/**
+logs/**
+data/**
+*.png
+benchmark.jar
