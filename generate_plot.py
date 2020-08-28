@@ -1,6 +1,7 @@
 import io
 import os
 import sys
+import re
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -19,6 +20,16 @@ def get_line_starting_with(txt, starts_with):
 
     return txt[first_index: last_index]
 
+def detect_decimal_separator(txt):
+    for line in txt.split('\n')[1:]:
+        if ',' in line:
+            return ','
+        elif '.' in line:
+            return '.'
+
+    raise Exception("Sorry, separator cannot be detected")
+
+
 
 def read_measures(filepath):
     result = pd.DataFrame()
@@ -36,7 +47,8 @@ def read_measures(filepath):
 
             data_string = io.StringIO("\n".join([line for line in txt.split('\n') if ';' in line]))
 
-            df = pd.read_csv(data_string, sep=';', decimal=',')
+            # df = pd.read_csv(data_string, sep=';', decimal=',')
+            df = pd.read_csv(data_string, sep=';', decimal=detect_decimal_separator(txt))
             df['java_version'] = java_version
             # df['memory'] = get_line_starting_with(txt, '-Xmx').replace('-Xmx', '')
             df['memory'] = pd.to_numeric(get_line_starting_with(txt, '-Xmx').replace('-Xmx', ''))
@@ -79,7 +91,8 @@ if __name__ == '__main__':
         # for test_name in test_names:
         for test_name in test_names[0:1]:
             data_subset = data_for_current_iterations_param[data_for_current_iterations_param['Benchmark'] == test_name]
-            plt.errorbar(data_subset['java_version'], data_subset['Score'], data_subset['Score Error (99,9%)'],
+            # plt.errorbar(data_subset['java_version'], data_subset['Score'], data_subset['Score Error (99,9%)'],
+            plt.errorbar(data_subset['java_version'], data_subset['Score'], data_subset[[col for col in measures.columns if 'Score Error' in col][0]],
                          label=test_name, lw=0.5, capsize=5, capthick=0.5, marker='o', markersize=2)
 
         plt.title("Sum of {:d} elements".format(current_iterations_param))
