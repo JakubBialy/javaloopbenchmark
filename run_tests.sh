@@ -18,6 +18,8 @@ do
         printf "Java major version: $curr_java_major_ver\n\n"
         JAVA_HOME=$(echo $item) mvn -Djdk.ver=$curr_java_major_ver clean package
 
+        echo "==="
+        echo "$item/bin/java -jar ./target/Java_Benchmarks-0.1.0.jar IteratingBenchmark -jvmArgs -XX:+UseG1GC -bm thrpt -wi 10 -w 5 -r 10 -i 30 -f 1 -rf scsv -rff $outputDir/benchmark_$curr_java_ver.scsv"
         $item/bin/java -jar ./target/Java_Benchmarks-0.1.0.jar IteratingBenchmark -jvmArgs -XX:+UseG1GC -bm thrpt -wi 10 -w 5 -r 10 -i 30 -f 1 -rf scsv -rff $outputDir/benchmark_$curr_java_ver.scsv
 done
 
