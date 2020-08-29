@@ -30,7 +30,7 @@ foreach ($javaDir in $javaDirs)
 
     & $java @(
     "-classpath",
-    "benchmark.jar;C:\Users\Jakub\projects\loops_performance\out;C:\Users\Jakub\.m2\repository\org\openjdk\jmh\jmh-core\1.25\jmh-core-1.25.jar;C:\Users\Jakub\.m2\repository\net\sf\jopt-simple\jopt-simple\4.6\jopt-simple-4.6.jar;C:\Users\Jakub\.m2\repository\org\apache\commons\commons-math3\3.2\commons-math3-3.2.jar;C:\Users\Jakub\.m2\repository\org\openjdk\jmh\jmh-generator-annprocess\1.25\jmh-generator-annprocess-1.25.jar",
+    "benchmark.jar;./libs/jmh-core-1.25.jar;./libs/jmh-generator-annprocess-1.25.jar;./libs/jopt-simple-4.6.jar;./libs/commons-math3-3.2.jar",
     "codes.dbg.IteratingBenchmark",
     "IteratingBenchmark",
     "-bm", "thrpt",
